@@ -4,4 +4,4 @@ Uses selenium to scrape websites.
 
 Usage - 
 
-python main.py -stockSymbol <yourChosenSymbol>
+python main.py -stockSymbol AAPL
