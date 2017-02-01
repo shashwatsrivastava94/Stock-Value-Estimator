@@ -1,5 +1,6 @@
 import argparse
 from PERatioEstimator import startPERatioEstimator
+from DiscountedCashFlowModel import startDCFEstimator
 
 def main():
 	parser = argparse.ArgumentParser(description="Estimate value of stocks by different methods")
@@ -7,6 +8,7 @@ def main():
 	args = parser.parse_args()
 	print args.stockSymbol
 
-	startPERatioEstimator(args.stockSymbol)
+	#startPERatioEstimator(args.stockSymbol)
+	startDCFEstimator(args.stockSymbol)
 
 main()
