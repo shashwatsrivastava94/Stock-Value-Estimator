@@ -60,7 +60,7 @@ def startDCFEstimator(stockSymbol):
 	outstandingStockNum = scraper.getElementFromPageUsingXpath('http://finance.yahoo.com/quote/%s/key-statistics?ltr=1' % stockSymbol,
 		'//*[@id="main-0-Quote-Proxy"]/section/div[2]/section/div/section/div[2]/div[2]/div/div[2]/table/tbody/tr[3]/td[2]/text()',
 		formatOutstandingStock)
-	print "Number of outstanding stock is %d" % outstandingStockNum 
+	print "Number of outstanding shares is %d" % outstandingStockNum 
 
 	totalNpvFcf = 0
 	year10FcfValue = 0
@@ -68,7 +68,7 @@ def startDCFEstimator(stockSymbol):
 		fcfValue = valueAfterGrowth(fcfValue, conservativeGrowthRate)
 		growthRate *= (1 - declineRate)
 		conservativeGrowthRate = 1 + growthRate
-		print "FCF value " + str(fcfValue) + " and the FCF NPV value " + str(fcfValue / (discountRate ** x))
+		# print "FCF value " + str(fcfValue) + " and the FCF NPV value " + str(fcfValue / (discountRate ** x))
 		totalNpvFcf += float(fcfValue / (discountRate ** x))
 		year10FcfValue = float(fcfValue / (discountRate ** x)) * year10Multiplier
 
@@ -78,7 +78,7 @@ def startDCFEstimator(stockSymbol):
 	companyValue = totalNpvFcf + year10FcfValue + cashAndCashEq - debts
 	print "Company value is %d" % companyValue
 
-	fairStockPrice = companyValue / float(outstandingStockNum)
+	fairStockPrice = (companyValue * 1000) / float(outstandingStockNum)
 	print "---------- The fair price of the company by DCF method is %.2f ----------" % fairStockPrice
 
 	# Teardown 
